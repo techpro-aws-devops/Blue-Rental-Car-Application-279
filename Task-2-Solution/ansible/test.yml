@@ -1,5 +1,5 @@
 - name: Setup Web Servers Based on Environment
-  hosts: _test_team_server
+  hosts: _test_server
   become: yes
   remote_user: ubuntu
 

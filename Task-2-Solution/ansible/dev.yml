@@ -1,5 +1,5 @@
 - name: Setup Web Servers Based on Environment
-  hosts: _dev_team_server
+  hosts: _dev_server
   become: yes
   remote_user: ec2-user
 
