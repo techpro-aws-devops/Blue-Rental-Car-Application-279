@@ -52,20 +52,20 @@ pipeline {
         }
               
         stage('ENV REACT UPDATE') {
-            steps {
-                echo 'env update'
-                dir('Task-3-Solution/terraform') {
-                    script {
-                        def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
-                        echo "JSON output: ${output}"
-                        def jsonOutput = readJSON text: output
-                        env.NODE_IP = jsonOutput // Tüm IP adreslerini alıyoruz
-                    }
-                }
-                sh "echo ${NODE_IP[0]}" // İlk IP adresi
-                //sh "echo ${NODE_IPS[1]}"  İkinci IP adresi
+    steps {
+        echo 'env update'
+        dir('Task-3-Solution/terraform') {
+            script {
+                def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
+                def jsonOutput = readJSON text: output
+                
+                // IP adreslerini bir dizi olarak ortam değişkenine aktarıyoruz
+                env.NODE_IPS = jsonOutput.join(',') // Virgülle birleştirerek tek bir string yapıyoruz
             }
         }
+        sh "echo Node IPs: ${env.NODE_IPS}" // Ortam değişkeninden tüm IP'leri yazdır
+    }
+}
 
         stage('ENVSUBST UPDATE DOCKER COMPOSE') {
             steps {
