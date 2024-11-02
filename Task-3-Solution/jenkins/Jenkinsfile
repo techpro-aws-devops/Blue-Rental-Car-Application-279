@@ -54,12 +54,14 @@ pipeline {
         stage('ENV REACT UPDATE') {
             steps {
                 echo 'env update'
-                dir('Task-3-Solution/terraform'){
-                script {
-                    env.NODE_IP = sh(script: 'terraform output -raw public_ip', returnStdout:true).trim()
+                dir('Task-3-Solution/terraform') {
+                    script {
+                        def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
+                        def jsonOutput = readJSON text: output
+                        env.NODE_IP = jsonOutput[0]
+                    }
                 }
-                }
-                sh "echo ${NODE_IP}"
+                sh "echo ${NODE_IP}" // İlk IP adresi
             }
         }
 
