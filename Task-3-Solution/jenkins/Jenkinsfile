@@ -121,7 +121,7 @@ pipeline {
                 sh 'ansible-inventory -i ./Task-3-Solution/ansible/inventory_aws_ec2.yml --graph'
                 sh """
                     cd Task-3-Solution/ansible
-                    ansible-playbook -i inventory_aws_ec2.yml --private-key="${WORKSPACE}/${ENVIRONMENT}" -e "compose_dir=${WORKSPACE}/Task-3-Solution/docker" ${ENVIRONMENT}.yml
+                    ansible-playbook -i inventory_aws_ec2.yml --private-key="${WORKSPACE}/${ENVIRONMENT}" -e "compose_dir=${WORKSPACE}/Task-3-Solution/docker" ${ENVIRONMENT}.yml-vv
                 """
              }
         }
