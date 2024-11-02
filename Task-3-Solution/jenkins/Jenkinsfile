@@ -57,6 +57,7 @@ pipeline {
                 dir('Task-3-Solution/terraform') {
                     script {
                         def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
+                        echo "JSON output: ${output}"
                         def jsonOutput = readJSON text: output
                         env.NODE_IP = jsonOutput // Tüm IP adreslerini alıyoruz
                     }
