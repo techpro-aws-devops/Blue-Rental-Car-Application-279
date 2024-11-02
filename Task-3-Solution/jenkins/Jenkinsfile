@@ -56,7 +56,7 @@ pipeline {
                 echo 'env update'
                 dir('Task-3-Solution/terraform'){
                 script {
-                    env.NODE_IP = sh(script: 'terraform output -raw node_public_ip', returnStdout:true).trim()
+                    env.NODE_IP = sh(script: 'terraform output -raw public_ip', returnStdout:true).trim()
                 }
                 }
                 sh "echo ${NODE_IP}"
