@@ -51,19 +51,23 @@ pipeline {
             }
         }
               
-        stage('ENV REACT UPDATE') {
+       stage('ENV REACT UPDATE') {
     steps {
         echo 'env update'
         dir('Task-3-Solution/terraform') {
             script {
+                // Terraform output'u JSON formatında al
                 def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
+                
+                // JSON çıktısını bir diziye dönüştür
                 def jsonOutput = readJSON text: output
                 
-                // IP adreslerini bir dizi olarak ortam değişkenine aktarıyoruz
-                env.NODE_IPS = jsonOutput.join(',') // Virgülle birleştirerek tek bir string yapıyoruz
+                // IP adreslerini virgülle birleştirip ortam değişkenine aktar
+                env.NODE_IPS = jsonOutput.join(',')
             }
         }
-        sh "echo Node IPs: ${env.NODE_IPS}" // Ortam değişkeninden tüm IP'leri yazdır
+        // Ortam değişkeninden tüm IP'leri yazdır
+        sh "echo Node IPs: ${env.NODE_IPS}"
     }
 }
 
