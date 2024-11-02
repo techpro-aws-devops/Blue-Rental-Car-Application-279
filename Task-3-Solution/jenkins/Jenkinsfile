@@ -58,10 +58,11 @@ pipeline {
                     script {
                         def output = sh(script: 'terraform output -json public_ip', returnStdout: true).trim()
                         def jsonOutput = readJSON text: output
-                        env.NODE_IP = jsonOutput[0]
+                        env.NODE_IP = jsonOutput // Tüm IP adreslerini alıyoruz
                     }
                 }
-                sh "echo ${NODE_IP}" // İlk IP adresi
+                sh "echo ${NODE_IP[0]}" // İlk IP adresi
+                //sh "echo ${NODE_IPS[1]}"  İkinci IP adresi
             }
         }
 
