@@ -51,9 +51,9 @@ pipeline {
             }
         }
               
-        stage('ENV REACT UPDATE') {
+        stage('CREATE ENV NODE_IP') {
             steps {
-                echo 'env update'
+                echo 'CREATE ENV'
                 dir('Task-3-Solution/terraform'){
                 script {
                     env.NODE_IP = sh(script: 'terraform output -raw public_ip', returnStdout:true).trim()
