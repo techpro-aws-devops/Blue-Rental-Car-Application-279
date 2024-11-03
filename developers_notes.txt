@@ -8,3 +8,12 @@ Database_Enironment:
 POSTGRES_USER: techprodb_user
 POSTGRES_PASSWORD: password
 POSTGRES_DB: carrental
+
+------------------------------------------------------
+DATABASE BİLGİLERİNİ KONTROL ETME
+-----------------------------------------------------
+docker exec -it b56110af67dc bash
+psql -U techprodb_user -h localhost -d carrental
+SELECT * FROM Users;
+\dt 
+\q 
