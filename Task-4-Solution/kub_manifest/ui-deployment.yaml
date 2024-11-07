@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yml -o ../kub_manifest/
+    kompose.cmd: kompose convert -f docker-compose.yml
     kompose.image-pull-secret: regcred
     kompose.service.expose: carrental.samdevops.link
     kompose.service.nodeport.port: "30001"
     kompose.service.type: nodeport
-    kompose.version: 1.34.0 (cbf2835db)
+    kompose.version: 1.33.0 (3ce457399)
   labels:
     io.kompose.service: ui
   name: ui
@@ -19,13 +19,14 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f docker-compose.yml -o ../kub_manifest/
+        kompose.cmd: kompose convert -f docker-compose.yml
         kompose.image-pull-secret: regcred
         kompose.service.expose: carrental.samdevops.link
         kompose.service.nodeport.port: "30001"
         kompose.service.type: nodeport
-        kompose.version: 1.34.0 (cbf2835db)
+        kompose.version: 1.33.0 (3ce457399)
       labels:
+        io.kompose.network/docker-carrental-net: "true"
         io.kompose.service: ui
     spec:
       containers:
@@ -36,6 +37,7 @@ spec:
           name: brc-frontend
           ports:
             - containerPort: 3000
+              hostPort: 3000
               protocol: TCP
       imagePullSecrets:
         - name: regcred
