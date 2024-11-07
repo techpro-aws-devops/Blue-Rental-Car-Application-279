@@ -120,7 +120,7 @@ pipeline {
                     cd Task-4-Solution/kub_manifest
                     sed -i 's/127.0.0.1/${NODE_IP}/g' /var/lib/jenkins/kubeconfig.yaml
                     export KUBECONFIG=/var/lib/jenkins/kubeconfig.yaml
-                    envsubst < kustomization-template.yaml > kustomization.yaml
+                    envsubst < kustomization-template.yml > kustomization.yml
                     kubectl apply -k .
                 """
              }
